@@ -1,11 +1,14 @@
 # HT16K33 Python Library #
 
+Note: This version has a port of the API from [tdicola's AdaFruit Trellis Python](https://github.com/tdicola/Adafruit_Trellis_Python) modified to work in the same way, via smbus, as the other HT16K33 drivers. Presented if anyone finds it useful. (codepope).
+
 A simple python library to control products using the HT16K33 IC.
 
  + Adafruit's LED backpacks
    + [BiColor LED Square Pixel Matrix](http://adafruit.com/products/902) - [HT16K33.BiColor](#bicolor-square)
    + [8x8 LED Matrix](http://adafruit.com/products/872) - [HT16K33.EightByEight](#eightbyeight)
    + [4 Digit 7-Segment Display](http://adafruit.com/products/878) - [HT16K33.FourDigit](#fourdigit)
+   + [Adafruit Trellis Monochrome Driver PCB for 4x4 Keypad & 3mm LEDs](https://www.adafruit.com/product/1616)
 
 ## Dependencies
 
