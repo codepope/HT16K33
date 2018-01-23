@@ -408,5 +408,92 @@ Parent object inherited by all HT16K33 LED backpacks. Not intended for direct us
      |      Write single character to a given postion
      
 
+### Trellis ###
+
+#### Example ####
+
+```python
+
+    #!/bin/env python
+    # Turn all the lights on then off
+    
+    from HT16K33 import Trellis
+
+    trellis=Trellis(bus=1).setUp()
+
+    numKeys=16
+
+    for i in range(numKeys):
+	    trellis.setLED(i)
+	    trellis.writeDisplay()
+	    time.sleep(0.05)
+    # then turn them off
+    for i in range(numKeys):
+	    trellis.clrLED(i)
+	    trellis.writeDisplay()
+	    time.sleep(0.05)
+
+    print('Press Ctrl-C to quit.')
+    while True:
+	    time.sleep(0.03)
+        # If a button was just pressed or released...
+		if trellis.readSwitches():
+			# go through every button
+			for i in range(numKeys):
+				# if it was pressed, turn it on
+				if trellis.justPressed(i):
+					print('v{0}'.format(i))
+					trellis.setLED(i)
+				# if it was released, turn it off
+				if trellis.justReleased(i):
+					print('^{0}'.format(i))
+					trellis.clrLED(i)
+			# tell the trellis to set the LEDs we requested
+			trellis.writeDisplay()
+
+```
+
+#### Methods ####
+
+    class Trellis(_HT16K33.Base)
+     |  Method resolution order:
+     |      Trellis
+     |      _HT16K33.Base
+     |      __builtin__.object
+     |  
+     |  Methods defined here:
+     |  
+     |  writeDisplay(self):
+     |      Write the LED display buffer values to the hardware.
+     |
+     |. clear(self):
+     |      Clear all the LEDs in the display buffer.
+     |
+     |  isKeyPressed(self, k):
+     |.     Check if the specified key was pressed during the last readSwitches call.
+     |
+     |. wasKeyPressed(self, k):
+     |      Check if the specified key was pressed before the last readSwitches call.
+     |
+     |  isLED(self, x):
+     |      Return True if the specified LED is illuminated in the display buffer.
+     |
+     |  setLED(self, x):
+     |      Turn on the specified LED in the display buffer.
+     |
+     |. clrLED(self, x):
+     |      Turn off the specified LED in the display buffer.
+     |
+     |. readSwitches(self):
+     |      Read the state of the buttons from the hardware.
+     |	    Returns True if a button is pressed, False otherwise.
+     |
+     |  justPressed(self, k):
+     |      Return True if the specified key was first pressed in the last readSwitches call.
+     |
+     |  justReleased(self, k):
+     |.     Return True if the specified key was just released in the last readSwitches call.
+     |
+   
 
 [1]:(http://dl.lm-sensors.org/i2c-tools/releases/i2c-tools-3.1.0.tar.bz2)
